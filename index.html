@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#071a20">
+<title>英語マスター | 静岡県高校受験</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#06151b;color:#edfdfb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}#app{max-width:440px;margin:auto;padding:18px 15px 70px}.screen{display:none}.screen.active{display:block}.top{display:flex;align-items:center;gap:12px;margin-bottom:18px}.back{width:40px;height:40px;border:1px solid #24434c;border-radius:12px;background:#10272f;color:#9fc1c8}.grow{flex:1}.title{font-size:26px;font-weight:900;letter-spacing:-.7px}.sub{color:#7ca0a8;font-size:13px;margin-top:4px}.streak{display:inline-block;margin-top:10px;background:#f59e0b18;border:1px solid #f59e0b55;color:#fbbf24;padding:5px 11px;border-radius:99px;font-weight:800;font-size:12px}.hero,.card{background:#10272f;border:1px solid #173941;border-radius:19px;padding:18px;margin-bottom:12px}.hero{background:linear-gradient(145deg,#12343b,#0d2229)}.progress{height:7px;background:#183840;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#14b8a6,#22d3ee);transition:width .35s}.section{margin:24px 3px 10px;color:#5f8790;font-size:11px;font-weight:900;letter-spacing:1px}.subject{display:flex;align-items:center;gap:13px;width:100%;text-align:left;color:inherit}.icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px}.subject h3{margin:0 0 4px;font-size:16px}.subject p{margin:0;color:#6d929a;font-size:12px}.arrow{margin-left:auto;color:#22d3ee;font-size:22px}.btn{width:100%;border:0;border-radius:15px;padding:15px 16px;margin-top:9px;background:linear-gradient(135deg,#0d9488,#0891b2);color:white;font-weight:900}.btn.secondary{background:#10272f;border:1px solid #24434c;color:#a8c6cc}.btn:disabled{opacity:.45}.unit{display:flex;align-items:center;gap:12px;text-align:left;width:100%;color:inherit}.unit-num{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#163840;color:#5eead4;font-weight:900}.unit.done{border-color:#10b98155}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:#0f766e30;color:#5eead4;font-size:11px;font-weight:900}.qtext{font-size:19px;line-height:1.55;font-weight:850;margin:15px 0}.diagram{background:#f8fafc;color:#0f172a;border-radius:14px;padding:13px;margin:12px 0;text-align:center;overflow:auto}.choices{display:grid;gap:9px}.choice{padding:14px;border:2px solid #24434c;border-radius:13px;background:#0a1e25;color:#e7fbf8;text-align:left;font-weight:700}.choice.correct{border-color:#10b981;background:#064e3b}.choice.wrong{border-color:#ef4444;background:#4c1118}.timer{margin:14px 0}.timer-row{display:flex;justify-content:space-between;color:#6f969e;font-size:12px;margin-bottom:6px}.hint{display:none;background:#2b2110;border:1px solid #f59e0b66;color:#fde68a;border-radius:14px;padding:14px;line-height:1.55;margin:12px 0}.hint.show{display:block}.feedback{display:none;border-radius:15px;padding:15px;line-height:1.6;margin:12px 0}.feedback.show{display:block}.feedback.ok{background:#063d32;border:1px solid #10b98166}.feedback.ng{background:#42151a;border:1px solid #ef444466}.numrow{display:flex;gap:8px}.numrow input{flex:1;min-width:0;background:#071a20;color:white;border:2px solid #24434c;border-radius:13px;padding:14px}.numrow span{padding:14px;background:#15343c;border-radius:13px}.result{text-align:center}.score{font-size:50px;font-weight:950;color:#5eead4}.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.stat{background:#0a1f26;border-radius:13px;padding:13px}.small{font-size:12px;color:#72969e}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.show{display:flex}.modal .box{max-width:420px;width:100%;background:#10272f;border-radius:20px;padding:20px}.danger{color:#fca5a5}.daily{border-color:#22d3ee55;background:linear-gradient(135deg,#12343b,#10272f)}@media(max-width:360px){.qtext{font-size:17px}.title{font-size:23px}}
+</style>
+</head>
+<body>
+<main id="app">
+<section id="screen-home" class="screen active">
+  <div class="title">🎧 英語マスター</div>
+  <div class="sub">浅羽中3年生・静岡県公立高校入試対策</div>
+  <div class="streak" id="streak">🔥 0日連続</div>
+  <div class="hero" style="margin-top:18px">
+    <div style="display:flex;justify-content:space-between;align-items:end"><div><b>全体進捗</b><div class="small" id="overall-text">基礎から積み上げよう</div></div><b id="overall-pct">0%</b></div>
+    <div class="progress" style="margin-top:12px"><div class="fill" id="overall-fill" style="width:0"></div></div>
+  </div>
+  <div class="card daily">
+    <span class="tag">今日の10分</span><h3 style="margin:10px 0 5px">まず5問だけ解こう</h3>
+    <div class="small">基礎と苦手を混ぜて、無理なく続けます。</div>
+    <button class="btn" onclick="startDaily()">今日の学習を始める</button>
+  </div>
+  <div class="section">▸ 分野を選ぶ</div><div id="subject-list"></div>
+  <div class="section">▸ 入試対策</div>
+  <button class="btn secondary" onclick="showShizuoka()">🗻 静岡県入試モード</button>
+  <button class="btn secondary" onclick="startWeak()">🎯 苦手だけ集中特訓</button>
+  <button class="btn secondary" onclick="showStats()">📊 学習記録を見る</button>
+</section>
+
+<section id="screen-units" class="screen">
+  <div class="top"><button class="back" onclick="goHome()">←</button><div><b id="units-title"></b><div class="small" id="units-sub"></div></div></div>
+  <div id="unit-list"></div>
+</section>
+
+<section id="screen-question" class="screen">
+  <div class="top"><button class="back" onclick="leaveQuiz()">←</button><div class="grow progress"><div id="q-progress" class="fill"></div></div><span class="small" id="q-count"></span></div>
+  <div class="card">
+    <div style="display:flex;gap:7px"><span class="tag" id="q-field"></span><span class="tag" id="q-level"></span></div>
+    <div class="qtext" id="q-prompt"></div><div id="q-diagram"></div><div id="answer-area"></div>
+  </div>
+  <div class="timer" id="hint-countdown"><div class="timer-row"><span>自力で考える時間</span><span id="timer-number">30秒</span></div><div class="progress"><div class="fill" id="timer-fill" style="width:100%"></div></div></div>
+  <div class="hint" id="hint-box"><b>💡 30秒ヒント</b><div id="hint-text" style="margin-top:6px"></div><button class="btn secondary" id="hint2-btn" onclick="showHint2()">もう一段ヒント</button><div id="hint2-text"></div></div>
+  <div class="feedback" id="feedback"></div>
+  <button class="btn" id="next-btn" style="display:none" onclick="nextQuestion()">次へ →</button>
+</section>
+
+<section id="screen-result" class="screen"><div class="result hero"><div class="small">今回の結果</div><div class="score" id="result-score"></div><h2 id="result-message"></h2><div class="breakdown" id="result-breakdown"></div></div><button class="btn" onclick="retryWrong()">間違えた問題を復習</button><button class="btn secondary" onclick="goHome()">ホームへ</button></section>
+<section id="screen-stats" class="screen"><div class="top"><button class="back" onclick="goHome()">←</button><b>学習記録</b></div><div id="stats-content"></div></section>
+<section id="screen-shizuoka" class="screen"><div class="top"><button class="back" onclick="goHome()">←</button><div><b>🗻 静岡県入試モード</b><div class="small">50分・50点を意識した実戦練習</div></div></div><div class="hero"><h3>直近入試の重点</h3><p class="small">放送問題、対話文、長文の要点把握、条件英作文を重点的に練習します。</p></div><button class="btn" onclick="startMiniMock()">10問ミニ模試</button><button class="btn secondary" onclick="startFullMock()">50点チャレンジ（25問）</button></section>
+</main>
+<div class="modal" id="diagram-modal" onclick="this.classList.remove('show')"><div class="box" id="diagram-large"></div></div>
+
+<script id="learning-engine">
+function createQuestionState(questionId){return{questionId,remainingSeconds:30,hintVisible:false,answered:false,usedHint:false}}
+function tickQuestionState(state){if(state.answered||state.hintVisible)return state;const n=Math.max(0,state.remainingSeconds-1);return{...state,remainingSeconds:n,hintVisible:n===0,usedHint:n===0}}
+function answerQuestionState(state,isCorrect){if(state.answered)return state;return{...state,answered:true,isCorrect}}
+function advanceQuestionState(nextQuestionId){return createQuestionState(nextQuestionId)}
+function nextWeakLevel(current,correct,usedHint){if(correct&&!usedHint)return Math.max(0,current-1);if(correct)return current;return current+1}
+function isUnitCleared(correctCount,totalCount){return totalCount>0&&correctCount/totalCount>=.7}
+</script>
+<script>
+const SUBJECTS=[
+ {id:"listening",name:"リスニング",emoji:"🎧",color:"#22d3ee",desc:"会話・案内・要点聞き取り"},
+ {id:"grammar",name:"語彙・文法",emoji:"🧩",color:"#a78bfa",desc:"単語・文法・語順整序"},
+ {id:"reading",name:"長文読解",emoji:"📖",color:"#10b981",desc:"対話文・説明文・資料読解"},
+ {id:"writing",name:"英作文",emoji:"✍️",color:"#f59e0b",desc:"応答・条件作文・意見表現"}
+];
+const UNIT_DEFS={
+ listening:["短い会話","時刻・場所・数字","案内放送","意図・理由","応答選択","リスニング入試演習"],
+ grammar:["基本語彙","時制・助動詞","比較・受け身","不定詞・動名詞","関係代名詞・語順","文法入試演習"],
+ reading:["短い対話文","メール・掲示","物語文","説明文","図表付き長文","読解入試演習"],
+ writing:["一文応答","語順整序","場面英作文","理由説明","意見英作文","英作文入試演習"]
+};
+const UNITS=SUBJECTS.flatMap(s=>UNIT_DEFS[s.id].map((name,i)=>({id:`${s.id}-${i+1}`,subjectId:s.id,name,level:i<2?"基礎":i<5?"標準":"入試",count:5})));
+const BASE=[
+["listening",1,"choice","音声: Where will Ken meet Emi?",["At the station","At the library","At school","At the park"],1,"場所を表す語を聞き取る。","Ken says, 'Let's meet at the library.' なので図書館。"],
+["listening",1,"choice","音声: What does Aya want to buy?",["A notebook","A ticket","A camera","A bag"],0,"want to buy の後を聞く。","Aya says she needs a new notebook。"],
+["listening",2,"choice","音声: What time does the bus leave?",["At 7:15","At 7:30","At 7:45","At 8:00"],2,"時刻の数字をメモする。","The bus leaves at seven forty-five。"],
+["listening",2,"choice","音声: How many students joined the club?",["12","15","20","25"],1,"人数を表す数字を聞き取る。","Fifteen students joined the club。"],
+["listening",3,"choice","音声: Why is the museum closed today?",["It is Monday","There is a storm","It is under repair","A festival is held"],2,"because の後が理由。","The announcement says it is closed for repairs。"],
+["listening",4,"choice","音声: Why did Tom take an umbrella?",["It was sunny","Rain was expected","His bag was heavy","He lost his hat"],1,"行動と理由を結ぶ。","The weather report said it would rain。"],
+["listening",5,"choice","How are you? に最も自然な応答は？",["I'm fine, thank you.","Yes, I do.","At three.","It's mine."],0,"質問が体調を尋ねている。","How are you? には状態を答える。"],
+["listening",5,"choice","Would you like some tea? に最も自然な応答は？",["Yes, please.","I like soccer.","Yesterday.","Two cups are."],0,"勧めを受ける表現。","Yes, please. は丁寧に勧めを受ける表現。"],
+["grammar",1,"choice","『必要とする』に当たる英単語は？",["need","leave","teach","carry"],0,"nで始まる基本動詞。","need は『必要とする』。"],
+["grammar",1,"choice","『環境』に当たる英単語は？",["event","environment","energy","entrance"],1,"周囲の自然や生活条件を表す語。","environment は『環境』。"],
+["grammar",2,"choice","I ( ) soccer yesterday.",["play","plays","played","playing"],2,"yesterday は過去。","過去の出来事なのでplayed。"],
+["grammar",2,"choice","You ( ) finish this work today.",["must","are","did","have"],0,"義務を表す助動詞。","must + 動詞の原形で『～しなければならない』。"],
+["grammar",3,"choice","This book is ( ) than that one.",["interesting","more interesting","most interesting","interest"],1,"than が比較級の目印。","長い形容詞はmoreを付ける。"],
+["grammar",3,"choice","This bridge ( ) in 1990.",["built","was built","is building","builds"],1,"橋は『建てられた』。","受け身の過去はwas built。"],
+["grammar",4,"choice","I want ( ) English well.",["speak","to speak","speaking","spoke"],1,"wantの後の形。","want to + 動詞で『～したい』。"],
+["grammar",4,"choice","She enjoys ( ) books.",["read","to read","reading","reads"],2,"enjoyの後は動名詞。","enjoy + -ing なのでreading。"],
+["grammar",5,"choice","The boy ( ) is running is my brother.",["who","which","where","when"],0,"先行詞が人。","人を説明する主格の関係代名詞who。"],
+["grammar",5,"choice","正しい語順は？",["I know where he lives.","I know where does he live.","I where know he lives.","Where he lives I know?"],0,"間接疑問は疑問詞+主語+動詞。","where he lives の語順にする。"],
+["reading",1,"choice","A: Can you help me after school? B: Sorry, I have soccer practice. Bが断る理由は？",["宿題","サッカー練習","買い物","病気"],1,"haveの後の予定を見る。","Bにはsoccer practiceがある。"],
+["reading",1,"choice","A: This bag is too heavy. B: I'll carry it for you. Bは何をする？",["バッグを運ぶ","バッグを買う","帰宅する","電話する"],0,"I'll の後の動作。","carry it はバッグを運ぶこと。"],
+["reading",2,"choice","Email: The meeting starts at 4:00 in Room 2. どこで始まる？",["Room 1","Room 2","Library","Gym"],1,"場所情報を探す。","in Room 2 と明記されている。"],
+["reading",2,"choice","Notice: Bring your lunch. Drinks will be provided. 生徒が持参するものは？",["飲み物","昼食","机","制服"],1,"Bring の目的語を見る。","Bring your lunch とある。"],
+["reading",3,"choice","Mika found a wallet and took it to the police station. Mikaの行動は？",["財布を使った","財布を届けた","財布を買った","財布を隠した"],1,"foundの後の行動を見る。","警察署へ持って行ったので届けた。"],
+["reading",3,"choice","The dog waited every day for its owner. 犬について分かることは？",["飼い主を待った","毎日逃げた","駅を嫌った","餌を売った"],0,"waited for の目的語を見る。","wait for its owner は飼い主を待つ。"],
+["reading",4,"choice","Using reusable bottles can reduce plastic waste. 主題は？",["プラスチック削減","運動習慣","交通安全","外国旅行"],0,"reduce plastic waste に注目。","再利用ボトルによる廃棄物削減が主題。"],
+["reading",4,"choice","Trees make cities cooler by giving shade. 木の効果は？",["街を涼しくする","雨を止める","道路を広げる","車を増やす"],0,"cooler とshadeを結ぶ。","木陰により都市を涼しくする。"],
+["reading",5,"choice","Table: Bus A 8:10/¥300, Bus B 8:30/¥250. 安いのは？",["Bus A","Bus B","同額","不明"],1,"料金欄を比較する。","¥250のBus Bが安い。"],
+["reading",5,"choice","Chart: Mon 20, Tue 35, Wed 28 visitors. 最多の日は？",["Mon","Tue","Wed","同数"],1,"3つの数を比較する。","35人のTuesdayが最多。"],
+["writing",1,"text","『私は毎日英語を勉強します。』を英語で書こう。",["I","study","English","every day"],0,"主語+動詞+目的語+時の表現。","I study English every day."],
+["writing",1,"text","『彼女はテニスが好きです。』を英語で書こう。",["She","likes","tennis"],0,"三人称単数のsに注意。","She likes tennis."],
+["writing",2,"choice","語順を整えた正しい文は？ words: you / do / what / like",["What do you like?","Do what you like?","What you do like?","You like what do?"],0,"疑問詞+do+主語+動詞。","What do you like? が正しい。"],
+["writing",2,"choice","語順を整えた正しい文は？ words: to / I / want / visit / Kyoto",["I want to visit Kyoto.","I to want visit Kyoto.","Want I Kyoto to visit.","Kyoto visit I want to."],0,"want to + 動詞。","I want to visit Kyoto."],
+["writing",3,"text","友達を週末のサッカーに誘う英文を書こう。",["Would","you","soccer"],0,"Would you like to ～? を使う。","Would you like to play soccer this weekend?"],
+["writing",3,"text","道に迷ったので駅への行き方を尋ねる英文を書こう。",["How","station"],0,"How can I get to ～? を使う。","How can I get to the station?"],
+["writing",4,"text","読書が好きな理由を英語1文で書こう。",["because"],0,"意見+because+理由。","I like reading because I can learn many things."],
+["writing",4,"text","学校行事で協力が大切な理由を英語1文で書こう。",["because"],0,"主張と理由をつなぐ。","Working together is important because we can help each other."],
+["writing",5,"text","将来したいことを理由とともに英語で書こう。",["want","because"],0,"want to とbecauseを使う。","I want to help people because making others happy is important to me."],
+["writing",5,"text","地域をよりよくする提案を英語で書こう。",["should","because"],0,"We should ～ because ... の形。","We should clean our parks because everyone uses them."]
+];
+function buildQuestions(){
+ let n=0;const out=[];
+ for(const b of BASE)for(let v=0;v<4;v++){n++;const [sid,ui,type,prompt]=b;const hint=type==="number"?b[7]:b[6],explanation=type==="number"?b[8]:b[7];const q={id:`q${n}`,unitId:`${sid}-${ui}`,subjectId:sid,type,level:ui<3?"基礎":ui<6?"標準":"入試",prompt:v?`${prompt}（類題${v+1}）`:prompt,hint1:hint,hint2:"文の主語・動詞と、問われている情報を1つずつ確かめよう。",explanation,misconception:"単語だけで決めず、語順と前後の文脈を結び付けよう。"};
+  if(type==="choice"){q.choices=b[4];q.answer=b[5]}else if(type==="number"){q.answer=b[4];q.unit=b[5];q.tolerance=b[6]}else if(type==="order"){q.items=b[4];q.answer=b[4]}else{q.required=b[4];q.model=explanation}
+  out.push(q);
+ }return out;
+}
+const QUESTIONS=buildQuestions();
+const STORE="eigo_master_v1";
+const DEFAULT={cleared:[],weak:{},attempts:0,correct:0,streak:0,lastDate:"",history:[]};
+function loadStore(){try{return{...DEFAULT,...JSON.parse(localStorage.getItem(STORE)||"{}")}}catch{return{...DEFAULT}}}
+let data=loadStore(),currentSubject=null,currentUnit=null,deck=[],qIndex=0,results=[],qState=null,hintTimerId=null,sessionType="unit";
+function save(){localStorage.setItem(STORE,JSON.stringify(data))}
+function show(id){stopHintTimer();document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(`screen-${id}`).classList.add("active");scrollTo(0,0)}
+function subjectOf(id){return SUBJECTS.find(s=>s.id===id)}
+function updateStreak(){const t=new Date().toDateString(),y=new Date(Date.now()-86400000).toDateString();if(data.lastDate!==t){data.streak=data.lastDate===y?data.streak+1:1;data.lastDate=t;save()}document.getElementById("streak").textContent=`🔥 ${data.streak}日連続`}
+function renderHome(){updateStreak();const p=Math.round(data.cleared.length/UNITS.length*100);document.getElementById("overall-pct").textContent=p+"%";document.getElementById("overall-fill").style.width=p+"%";document.getElementById("overall-text").textContent=`${data.cleared.length}/${UNITS.length}単元クリア`;document.getElementById("subject-list").innerHTML=SUBJECTS.map(s=>`<button class="card subject" onclick="openSubject('${s.id}')"><span class="icon" style="background:${s.color}22">${s.emoji}</span><span><h3>${s.name}</h3><p>${s.desc}</p></span><span class="arrow">›</span></button>`).join("")}
+function goHome(){show("home");renderHome()}
+function openSubject(id){currentSubject=subjectOf(id);document.getElementById("units-title").textContent=`${currentSubject.emoji} ${currentSubject.name}`;document.getElementById("units-sub").textContent=currentSubject.desc;document.getElementById("unit-list").innerHTML=UNITS.filter(u=>u.subjectId===id).map((u,i)=>`<button class="card unit ${data.cleared.includes(u.id)?"done":""}" onclick="startUnit('${u.id}')"><span class="unit-num">${data.cleared.includes(u.id)?"✓":i+1}</span><span class="grow"><b>${u.name}</b><div class="small">${u.level}・5問</div></span><span>›</span></button>`).join("");show("units")}
+function startUnit(id){currentUnit=UNITS.find(u=>u.id===id);currentSubject=subjectOf(currentUnit.subjectId);deck=shuffle(QUESTIONS.filter(q=>q.unitId===id)).slice(0,5);beginSession("unit")}
+function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
+function beginSession(type){sessionType=type;qIndex=0;results=[];show("question");loadQuestion()}
+function startDaily(){const weakIds=Object.entries(data.weak).filter(([,v])=>v>0).map(([id])=>id);const pool=[...QUESTIONS.filter(q=>weakIds.includes(q.id)),...shuffle(QUESTIONS)];deck=[...new Map(pool.map(q=>[q.id,q])).values()].slice(0,5);currentUnit=null;currentSubject={name:"今日の10分",emoji:"⏱"};beginSession("daily")}
+function startWeak(){const pool=QUESTIONS.filter(q=>(data.weak[q.id]||0)>0).sort((a,b)=>(data.weak[b.id]||0)-(data.weak[a.id]||0));if(!pool.length){alert("苦手問題はまだありません。まず今日の学習に挑戦しよう。");return}deck=pool.slice(0,10);currentUnit=null;currentSubject={name:"苦手特訓",emoji:"🎯"};beginSession("weak")}
+function showShizuoka(){show("shizuoka")}
+function startMiniMock(){deck=balanced(10);currentUnit=null;currentSubject={name:"静岡県ミニ模試",emoji:"🗻"};beginSession("mock")}
+function startFullMock(){deck=balanced(25);currentUnit=null;currentSubject={name:"50点チャレンジ",emoji:"📝"};beginSession("full")}
+function balanced(count){const each=Math.floor(count/4),arr=[];SUBJECTS.forEach((s,i)=>arr.push(...shuffle(QUESTIONS.filter(q=>q.subjectId===s.id&&q.level!=="基礎")).slice(0,each+(i<count%4?1:0))));return shuffle(arr)}
+function loadQuestion(){const q=deck[qIndex];qState=createQuestionState(q.id);document.getElementById("q-count").textContent=`${qIndex+1}/${deck.length}`;document.getElementById("q-progress").style.width=`${qIndex/deck.length*100}%`;document.getElementById("q-field").textContent=`${subjectOf(q.subjectId).emoji} ${subjectOf(q.subjectId).name}`;document.getElementById("q-level").textContent=q.level;document.getElementById("q-prompt").textContent=q.prompt;document.getElementById("q-diagram").innerHTML=makeDiagram(q);renderAnswer(q);document.getElementById("hint-box").classList.remove("show");document.getElementById("hint2-text").textContent="";document.getElementById("hint2-btn").style.display="block";document.getElementById("feedback").className="feedback";document.getElementById("next-btn").style.display="none";renderTimer();startHintTimer()}
+function makeDiagram(q){if(q.subjectId==="listening")return`<div class="diagram"><button class="btn" onclick="speakCurrent()">🔊 英文を聞く</button><div class="small">聞き取れない語があっても、場所・時刻・理由に注目</div></div>`;if(q.subjectId==="reading")return`<div class="diagram"><b>読解の順番</b><br>設問を読む → キーワードを探す → 前後1文を確認</div>`;return""}
+function enlarge(html){document.getElementById("diagram-large").innerHTML=html;document.getElementById("diagram-modal").classList.add("show")}
+function speakCurrent(){const q=deck[qIndex];const text=q.prompt.replace(/^音声:\s*/,"");if(!("speechSynthesis" in window)){alert("この端末では音声読み上げを利用できません。");return}speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang="en-US";utterance.rate=.82;speechSynthesis.speak(utterance)}
+function renderAnswer(q){const a=document.getElementById("answer-area");if(q.type==="choice")a.innerHTML=`<div class="choices">${q.choices.map((c,i)=>`<button class="choice" onclick="answer(${i},this)">${c}</button>`).join("")}</div>`;else if(q.type==="number")a.innerHTML=`<div class="numrow"><input id="number-answer" inputmode="decimal" placeholder="数値を入力"><span>${q.unit}</span></div><button class="btn" onclick="answerNumber()">答える</button>`;else if(q.type==="order")a.innerHTML=`<div class="small">正しい順番を考えよう</div><div class="choices">${q.items.map((x,i)=>`<button class="choice" onclick="answerOrder(${i})">${i+1}. ${x}</button>`).join("")}</div><button class="btn" onclick="answerOrderDone()">この順で答える</button>`;else a.innerHTML=`<textarea id="text-answer" style="width:100%;min-height:100px;background:#071a20;color:white;border:2px solid #24434c;border-radius:13px;padding:12px" placeholder="理由を書こう"></textarea><button class="btn" onclick="answerText()">答える</button>`}
+function startHintTimer(){stopHintTimer();const seconds=window.__HINT_SECONDS__??30;qState={...qState,remainingSeconds:seconds};hintTimerId=setInterval(()=>{qState=tickQuestionState(qState);renderTimer();if(qState.hintVisible){showHint();stopHintTimer()}},1000)}
+function stopHintTimer(){if(hintTimerId){clearInterval(hintTimerId);hintTimerId=null}}
+function renderTimer(){document.getElementById("timer-number").textContent=`${qState.remainingSeconds}秒`;document.getElementById("timer-fill").style.width=`${qState.remainingSeconds/30*100}%`;document.getElementById("hint-countdown").style.display=qState.answered||qState.hintVisible?"none":"block"}
+function showHint(){qState={...qState,hintVisible:true,usedHint:true};const q=deck[qIndex];document.getElementById("hint-text").textContent=q.hint1;document.getElementById("hint-box").classList.add("show")}
+function showHint2(){qState={...qState,usedHint:true};document.getElementById("hint2-text").textContent=deck[qIndex].hint2;document.getElementById("hint2-btn").style.display="none"}
+function answer(chosen,btn){finishAnswer(chosen===deck[qIndex].answer,btn,deck[qIndex].choices[deck[qIndex].answer])}
+function answerNumber(){const q=deck[qIndex],v=Number(document.getElementById("number-answer").value);finishAnswer(Number.isFinite(v)&&Math.abs(v-q.answer)<=q.tolerance,null,`${q.answer}${q.unit}`)}
+let orderClicks=[];function answerOrder(i){if(!qState.answered&&!orderClicks.includes(i)){orderClicks.push(i);event.currentTarget.style.opacity=".45"}}
+function answerOrderDone(){const q=deck[qIndex],ok=orderClicks.length===q.items.length&&orderClicks.every((x,i)=>x===i);finishAnswer(ok,null,q.items.join(" → "));orderClicks=[]}
+function answerText(){const q=deck[qIndex],t=document.getElementById("text-answer").value,ok=q.required.every(k=>t.includes(k));finishAnswer(ok,null,q.model)}
+function finishAnswer(ok,btn,correctAnswer){if(qState.answered)return;stopHintTimer();qState=answerQuestionState(qState,ok);renderTimer();document.querySelectorAll("#answer-area button,#answer-area input,#answer-area textarea").forEach(x=>x.disabled=true);if(btn)btn.classList.add(ok?"correct":"wrong");const q=deck[qIndex],fb=document.getElementById("feedback");fb.className=`feedback show ${ok?"ok":"ng"}`;fb.innerHTML=`<b>${ok?"⭕ 正解！":"❌ もう一度覚えよう"}</b>${ok?"":`<div>正解：${correctAnswer}</div>`}<div style="margin-top:7px">${q.explanation}</div><div class="small" style="margin-top:7px">つまずきポイント：${q.misconception}</div>`;results.push({q,ok,usedHint:qState.usedHint});data.attempts++;if(ok)data.correct++;data.weak[q.id]=nextWeakLevel(data.weak[q.id]||0,ok,qState.usedHint);data.history.push({id:q.id,ok,date:Date.now()});data.history=data.history.slice(-300);save();document.getElementById("next-btn").style.display="block";document.getElementById("next-btn").textContent=qIndex===deck.length-1?"結果を見る 📊":"次へ →"}
+function nextQuestion(){if(!qState.answered)return;if(qIndex===deck.length-1){showResult();return}qIndex++;loadQuestion();scrollTo(0,0)}
+function leaveQuiz(){stopHintTimer();currentSubject&&currentSubject.id?openSubject(currentSubject.id):goHome()}
+function showResult(){stopHintTimer();const ok=results.filter(r=>r.ok).length,pct=Math.round(ok/results.length*100);if(currentUnit&&isUnitCleared(ok,results.length)&&!data.cleared.includes(currentUnit.id)){data.cleared.push(currentUnit.id);save()}document.getElementById("result-score").textContent=sessionType==="full"?`${ok*2}/50`:`${pct}%`;document.getElementById("result-message").textContent=pct>=80?"よく理解できています":pct>=60?"あと少しで安定します":"基礎に戻れば伸びます";document.getElementById("result-breakdown").innerHTML=SUBJECTS.map(s=>{const r=results.filter(x=>x.q.subjectId===s.id),c=r.filter(x=>x.ok).length;return`<div class="stat">${s.emoji} ${s.name}<br><b>${r.length?`${c}/${r.length}`:"-"}</b></div>`}).join("");show("result")}
+function retryWrong(){const wrong=results.filter(r=>!r.ok).map(r=>r.q);if(!wrong.length){goHome();return}deck=wrong;currentUnit=null;currentSubject={name:"間違い直し",emoji:"🔁"};beginSession("retry")}
+function showStats(){const rate=data.attempts?Math.round(data.correct/data.attempts*100):0,weak=Object.values(data.weak).filter(v=>v>0).length;document.getElementById("stats-content").innerHTML=`<div class="hero"><div class="score">${rate}%</div><div>累計正答率</div></div><div class="breakdown"><div class="stat"><b>${data.attempts}</b><div class="small">解いた問題</div></div><div class="stat"><b>${weak}</b><div class="small">復習待ち</div></div><div class="stat"><b>${data.cleared.length}</b><div class="small">クリア単元</div></div><div class="stat"><b>${data.streak}</b><div class="small">連続日数</div></div></div>`;show("stats")}
+
+let canvasScrollY=0;
+function lockCanvasScroll(){
+ canvasScrollY=window.scrollY;
+ document.body.style.overflow="hidden";
+ document.body.style.position="fixed";
+ document.body.style.top=`-${canvasScrollY}px`;
+ document.body.style.width="100%";
+}
+function unlockCanvasScroll(){
+ document.body.style.overflow="";
+ document.body.style.position="";
+ document.body.style.top="";
+ document.body.style.width="";
+ window.scrollTo(0,canvasScrollY);
+}
+document.addEventListener("touchstart",event=>{if(event.target.closest?.("canvas"))lockCanvasScroll()},{passive:true});
+document.addEventListener("touchend",event=>{if(event.target.closest?.("canvas"))unlockCanvasScroll()},{passive:true});
+document.addEventListener("touchcancel",event=>{if(event.target.closest?.("canvas"))unlockCanvasScroll()},{passive:true});
+
+window.goHome = goHome;
+window.openSubject = openSubject;
+window.startUnit = startUnit;
+window.startDaily = startDaily;
+window.startWeak = startWeak;
+window.startMiniMock = startMiniMock;
+window.startFullMock = startFullMock;
+window.answer = answer;
+window.answerNumber = answerNumber;
+window.answerText = answerText;
+window.answerOrder = answerOrder;
+window.answerOrderDone = answerOrderDone;
+window.nextQuestion = nextQuestion;
+window.retryWrong = retryWrong;
+window.leaveQuiz = leaveQuiz;
+window.showShizuoka = showShizuoka;
+window.showStats = showStats;
+window.enlarge = enlarge;
+window.showHint2 = showHint2;
+window.speakCurrent = speakCurrent;
+
+renderHome();
+</script>
+</body>
+</html>
